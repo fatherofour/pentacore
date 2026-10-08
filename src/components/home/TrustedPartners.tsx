@@ -1,18 +1,15 @@
 "use client";
 
 import Image from "next/image";
+import { ScrollText } from "@/components/ui/ScrollText";
 import { motion } from "framer-motion";
 
 const partners = [
   { name: "Microsoft", src: "/logos/microsoft.svg" },
   { name: "Microsoft Azure", src: "/logos/azure.svg" },
   { name: "Microsoft 365", src: "/logos/microsoft-365.svg" },
-  { name: "Amazon Web Services", src: "/logos/aws.svg" },
-  { name: "Cisco", src: "/logos/cisco.svg" },
   { name: "Zoho", src: "/logos/zoho.svg" },
-  { name: "VMware", src: "/logos/vmware.svg" },
-  { name: "Fortinet", src: "/logos/fortinet.svg" },
-  { name: "Dell Technologies", src: "/logos/dell.svg" },
+  { name: "Oracle Cloud", src: "/logos/oracle-cloud.svg" },
 ];
 
 function PartnerLogo({ name, src }: { name: string; src: string }) {
@@ -31,7 +28,7 @@ function PartnerLogo({ name, src }: { name: string; src: string }) {
 
 export function TrustedPartners() {
   return (
-    <section className="py-16 relative overflow-hidden">
+    <section className="py-12 relative overflow-hidden">
       <div className="glow-orb glow-blue w-[400px] h-[400px] -top-52 left-1/2 -translate-x-1/2 opacity-60" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
@@ -42,12 +39,7 @@ export function TrustedPartners() {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <p className="label-mono text-[#7C8AA5] mb-2">
-            Technology Partners
-          </p>
-          <h2 className="heading-secondary text-2xl sm:text-3xl text-white">
-            Trusted by the world&apos;s leading technology providers
-          </h2>
+          {/* <ScrollText className="heading-secondary text-2xl sm:text-3xl text-ink" text={"OEMs we"} accent={"Deliver"} /> */}
         </motion.div>
       </div>
 
@@ -62,7 +54,7 @@ export function TrustedPartners() {
         }}
       >
         <div className="marquee-track hover:[animation-play-state:paused]">
-          {[...partners, ...partners].map((partner, i) => (
+          {[...partners, ...partners, ...partners, ...partners].map((partner, i) => (
             <PartnerLogo key={`${partner.name}-${i}`} {...partner} />
           ))}
         </div>

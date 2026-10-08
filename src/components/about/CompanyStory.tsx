@@ -1,21 +1,22 @@
 "use client";
 
 import Image from "next/image";
+import { ScrollText } from "@/components/ui/ScrollText";
 import { motion } from "framer-motion";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle } from "@/components/ui/icons";
 
 const milestones = [
-  { year: "2014", title: "Founded", desc: "Pentacore Systems founded in London by technology veterans with a mission to democratise enterprise IT." },
+  { year: "2014", title: "Founded", desc: "The Crew Solutions founded in London by technology veterans with a mission to democratise enterprise IT." },
   { year: "2016", title: "Microsoft Partnership", desc: "Achieved Microsoft Gold Partner status, enabling us to deliver certified Microsoft solutions at scale." },
   { year: "2018", title: "Cloud Division", desc: "Launched our Cloud Migration practice, helping 15 organisations move to Azure in year one." },
   { year: "2020", title: "Security Practice", desc: "Established our dedicated Cybersecurity division, growing rapidly amid increased cyber threats." },
   { year: "2022", title: "International Growth", desc: "Expanded services to cover clients across 15+ countries with a distributed team of 80+ specialists." },
-  { year: "2024", title: "AI & Automation", desc: "Launched AI-powered managed services and digital transformation advisory practice." },
+  { year: "2024", title: "AI & Automation", desc: "Launched AI-powered remote support and digital transformation advisory practice." },
 ];
 
 export function CompanyStory() {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-14 md:py-16 relative overflow-hidden">
       <div className="glow-orb glow-cyan w-[440px] h-[440px] top-1/3 -left-56 opacity-60" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,19 +29,13 @@ export function CompanyStory() {
             transition={{ duration: 0.6 }}
             className="mb-12 lg:mb-0"
           >
-            <span className="tag-pill mb-4">
-              Our Story
-            </span>
-            <h2 className="heading-secondary text-3xl sm:text-4xl text-white mb-6 text-balance">
-              Built on expertise,{" "}
-              <span className="gradient-text">driven by outcomes</span>
-            </h2>
-            <p className="text-[#A6B3C9] text-lg leading-relaxed mb-6">
-              Pentacore Systems was born from a simple belief: that every business, regardless
+            <ScrollText className="heading-secondary text-3xl sm:text-4xl text-ink mb-6 text-balance" text={"Built on expertise,"} accent={"driven by outcomes"} />
+            <p className="text-body text-lg leading-relaxed mb-6">
+              The Crew Solutions was born from a simple belief: that every business, regardless
               of size, deserves access to the same quality of technology solutions used by
               the world&apos;s largest enterprises.
             </p>
-            <p className="text-[#A6B3C9] text-lg leading-relaxed mb-8">
+            <p className="text-body text-lg leading-relaxed mb-8">
               Over the past decade, we&apos;ve built a team of passionate technologists,
               strategists, and engineers who live and breathe digital transformation. Our
               clients trust us not just to implement technology, but to be their long-term
@@ -56,8 +51,8 @@ export function CompanyStory() {
                 "Dedicated customer success team for every client",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#40A3E0] flex-shrink-0" />
-                  <span className="text-[#A6B3C9] text-sm">{item}</span>
+                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
+                  <span className="text-body text-sm">{item}</span>
                 </div>
               ))}
             </div>
@@ -66,12 +61,12 @@ export function CompanyStory() {
             <div className="relative rounded-[2rem] overflow-hidden h-56 border border-white/15 shadow-2xl shadow-black/40">
               <Image
                 src="https://images.unsplash.com/photo-1571624436279-b272aff752b5?w=1000&q=80&auto=format&fit=crop"
-                alt="Pentacore Systems office"
+                alt="The Crew Solutions office"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#060B1A]/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-page/50 to-transparent" />
             </div>
           </motion.div>
 
@@ -102,8 +97,8 @@ export function CompanyStory() {
                     </div>
 
                     <div className="glass-card p-5 flex-1">
-                      <h3 className="font-bold text-white text-base mb-1">{m.title}</h3>
-                      <p className="text-[#A6B3C9] text-sm leading-relaxed">{m.desc}</p>
+                      <h3 className="font-bold text-ink text-base mb-1">{m.title}</h3>
+                      <p className="text-body text-sm leading-relaxed">{m.desc}</p>
                     </div>
                   </motion.div>
                 ))}

@@ -1,12 +1,13 @@
 "use client";
 
 import { useRef } from "react";
+import { HeroFX } from "@/components/ui/HeroFX";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Heart, GraduationCap, Landmark, Factory, ShoppingBag, Briefcase, Building, Globe, CheckCircle, ArrowRight,
-} from "lucide-react";
+} from "@/components/ui/icons";
 
 const industries = [
   {
@@ -14,7 +15,7 @@ const industries = [
     name: "Healthcare",
     slug: "healthcare",
     tagline: "Technology that improves patient outcomes",
-    desc: "We help healthcare providers adopt HIPAA-compliant cloud solutions, secure patient data, enable telehealth, and streamline clinical workflows—so clinicians can focus on care.",
+    desc: "We help healthcare providers adopt HIPAA-compliant cloud solutions, secure patient data, enable telehealth, and streamline clinical workflows, so clinicians can focus on care.",
     challenges: ["Patient data security & HIPAA/GDPR compliance", "Telehealth infrastructure", "EHR system integration", "Medical device management"],
     solutions: ["Microsoft 365 for Healthcare", "Azure Health Data Services", "Endpoint security for clinical devices", "Secure video consultation platforms"],
     color: "from-rose-500 to-rose-700",
@@ -80,7 +81,7 @@ const industries = [
     name: "Professional Services",
     slug: "professional-services",
     tagline: "Technology that scales with your practice",
-    desc: "Law firms, consultancies, and accounting practices trust Pentacore to deliver secure document management, client collaboration platforms, and compliant IT infrastructure.",
+    desc: "Law firms, consultancies, and accounting practices trust The Crew Solutions to deliver secure document management, client collaboration platforms, and compliant IT infrastructure.",
     challenges: ["Client confidentiality and data security", "Remote working and collaboration", "Document management and eDiscovery", "Business continuity"],
     solutions: ["Microsoft 365 Business Premium", "SharePoint for document management", "Azure Information Protection", "Managed security and compliance"],
     color: "from-violet-500 to-violet-700",
@@ -93,7 +94,7 @@ const industries = [
     tagline: "Enterprise-grade IT, built for smaller budgets",
     desc: "We make world-class technology accessible to SMEs and NGOs, offering cost-effective Microsoft 365, Zoho, and cloud solutions that grow with your organisation.",
     challenges: ["Limited IT budget and resources", "Keeping up with technology changes", "Cybersecurity for small teams", "Scalable solutions without high CapEx"],
-    solutions: ["Microsoft 365 Business", "Zoho Workplace for SMEs", "Managed IT services for cost efficiency", "Cloud-first infrastructure"],
+    solutions: ["Microsoft 365 Business", "Zoho Workplace for SMEs", "Remote IT support for cost efficiency", "Cloud-first infrastructure"],
     color: "from-cyan-500 to-cyan-700",
     photo: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1200&q=80&auto=format&fit=crop",
   },
@@ -108,7 +109,7 @@ function IndustriesHero() {
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
 
   return (
-    <section ref={sectionRef} className="relative pt-40 pb-20 overflow-hidden">
+    <section ref={sectionRef} className="relative pt-40 pb-12 overflow-hidden">
       <motion.div style={{ y: imageY }} className="absolute inset-0 scale-110">
         <Image
           src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80&auto=format&fit=crop"
@@ -116,25 +117,20 @@ function IndustriesHero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-20"
+          className="hero-photo object-cover opacity-40 saturate-[1.2]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#060B1A]/70 via-[#060B1A]/85 to-[#060B1A]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-page/70 via-page/85 to-page" />
       </motion.div>
 
-      <div className="glow-orb glow-blue w-[480px] h-[480px] -top-40 left-1/3" />
-      <div className="glow-orb glow-purple w-[380px] h-[380px] top-10 -right-32" />
-      <div className="absolute inset-0 grid-lines pointer-events-none" />
+      <HeroFX />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-          <span className="tag-pill mb-6">
-            Industries We Serve
-          </span>
-          <h1 className="heading-display text-white text-6xl sm:text-7xl lg:text-8xl mb-6 text-balance">
+          <h1 className="heading-display text-ink text-6xl sm:text-7xl lg:text-7xl mb-6 text-balance">
             Sector-Specific Expertise,{" "}
             <span className="gradient-text">Universal Excellence</span>
           </h1>
-          <p className="text-[#A6B3C9] text-xl max-w-2xl mx-auto">
+          <p className="text-body text-xl max-w-2xl mx-auto">
             Deep industry knowledge combined with enterprise technology expertise to deliver
             solutions that meet your sector&apos;s unique requirements.
           </p>
@@ -150,7 +146,7 @@ export function IndustriesPage() {
       <IndustriesHero />
 
       {/* Industries list */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-14 md:py-16 relative overflow-hidden">
         <div className="glow-orb glow-cyan w-[460px] h-[460px] top-1/4 -left-56 opacity-50" />
         <div className="glow-orb glow-blue w-[460px] h-[460px] bottom-1/4 -right-56 opacity-50" />
 
@@ -158,11 +154,12 @@ export function IndustriesPage() {
           {industries.map((ind, i) => (
             <motion.div
               key={ind.name}
+              id={ind.slug}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}
+              className={`scroll-mt-32 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}
             >
               {/* Content */}
               <div>
@@ -175,15 +172,15 @@ export function IndustriesPage() {
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#060B1A]/70 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-page/70 via-transparent to-transparent" />
                   <div className={`absolute bottom-4 left-4 w-12 h-12 rounded-xl bg-gradient-to-br ${ind.color} border border-white/25 shadow-lg flex items-center justify-center`}>
                     <ind.icon className="w-6 h-6 text-white" />
                   </div>
                 </div>
 
-                <span className="label-mono text-[#40A3E0]">{ind.tagline}</span>
-                <h2 className="heading-secondary text-2xl sm:text-3xl text-white mt-2 mb-4">{ind.name}</h2>
-                <p className="text-[#A6B3C9] text-base leading-relaxed mb-6">{ind.desc}</p>
+                <span className="label-mono text-accent">{ind.tagline}</span>
+                <h2 className="heading-secondary text-2xl sm:text-3xl text-ink mt-2 mb-4">{ind.name}</h2>
+                <p className="text-body text-base leading-relaxed mb-6">{ind.desc}</p>
                 <Link href={`/industries/${ind.slug}`} className="btn-filled group">
                   Explore {ind.name} Solutions
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -193,22 +190,22 @@ export function IndustriesPage() {
               {/* Challenges & Solutions — glass panels */}
               <div className="space-y-5">
                 <div className="glass-card p-6">
-                  <h4 className="label-mono text-white mb-3">Key Challenges We Solve</h4>
+                  <h4 className="label-mono text-ink mb-3">Key Challenges We Solve</h4>
                   <ul className="space-y-2">
                     {ind.challenges.map((c) => (
-                      <li key={c} className="flex items-start gap-2.5 text-sm text-[#A6B3C9]">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#40A3E0] mt-1.5 flex-shrink-0" />
+                      <li key={c} className="flex items-start gap-2.5 text-sm text-body">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0" />
                         {c}
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div className="glass-card p-6">
-                  <h4 className="label-mono text-white mb-3">Our Solutions</h4>
+                  <h4 className="label-mono text-ink mb-3">Our Solutions</h4>
                   <ul className="space-y-2">
                     {ind.solutions.map((s) => (
-                      <li key={s} className="flex items-start gap-2.5 text-sm text-[#A6B3C9]">
-                        <CheckCircle className="w-4 h-4 text-[#40A3E0] flex-shrink-0 mt-0.5" />
+                      <li key={s} className="flex items-start gap-2.5 text-sm text-body">
+                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
                         {s}
                       </li>
                     ))}

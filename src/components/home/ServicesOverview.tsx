@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { ScrollText } from "@/components/ui/ScrollText";
 import Link from "next/link";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
   Monitor,
   Cloud,
   BarChart3,
-  Globe,
   Server,
   Shield,
   Database,
@@ -20,7 +20,13 @@ import {
   Building2,
   Code2,
   AppWindow,
-} from "lucide-react";
+  PhoneCall,
+  FileText,
+  GitBranch,
+  SearchCheck,
+  Activity,
+  ClipboardCheck,
+} from "@/components/ui/icons";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 
 type Service = {
@@ -39,6 +45,8 @@ const categories: { label: string; services: Service[] }[] = [
       { icon: Monitor, name: "Microsoft 365", desc: "Full deployment, migration, and management of the complete Microsoft 365 suite for your organisation.", href: "/services/microsoft-365", color: "bg-[#0078D4]", tag: "Most Popular" },
       { icon: Cloud, name: "Azure Cloud", desc: "Design, deploy, and optimise Microsoft Azure infrastructure tailored to your business needs.", href: "/services/azure", color: "bg-sky-600" },
       { icon: BarChart3, name: "Dynamics 365", desc: "Unify ERP and CRM capabilities to streamline operations and accelerate sales cycles.", href: "/services/dynamics-365", color: "bg-violet-600" },
+      { icon: FileText, name: "SharePoint Online", desc: "Intranets, document management and collaboration portals that keep teams connected and information secure.", href: "/services/sharepoint", color: "bg-teal-600" },
+      { icon: Monitor, name: "Microsoft Intune", desc: "Cloud device and app management that keeps every laptop and phone secure, compliant and up to date.", href: "/services/intune", color: "bg-sky-600" },
       { icon: Server, name: "Cloud Migration", desc: "Seamless, risk-managed migration of applications and infrastructure to the cloud.", href: "/services/cloud-migration", color: "bg-emerald-600" },
     ],
   },
@@ -52,10 +60,18 @@ const categories: { label: string; services: Service[] }[] = [
     ],
   },
   {
-    label: "Managed & Outsourcing",
+    label: "Audit & Risk",
     services: [
-      { icon: Headphones, name: "Managed Services", desc: "24/7 proactive monitoring, support, and management of your entire IT environment.", href: "/services/managed-services", color: "bg-orange-600" },
-      { icon: Globe, name: "IT Outsourcing", desc: "Dedicated IT teams and helpdesk services, freeing you to focus on core business activities.", href: "/services/it-outsourcing", color: "bg-cyan-600" },
+      { icon: ClipboardCheck, name: "IT Audit", desc: "Independent review of your IT controls, systems and processes against best practice and compliance needs.", href: "/services/it-audit", color: "bg-indigo-600", tag: "New" },
+      { icon: SearchCheck, name: "Cybersecurity Gap Analysis", desc: "Measure your security posture against a recognised framework and get a prioritised plan to close the gaps.", href: "/services/cybersecurity-gap-analysis", color: "bg-rose-600", tag: "New" },
+      { icon: Activity, name: "Business Impact Analysis", desc: "Identify critical processes and the real cost of downtime, so recovery plans match what matters most.", href: "/services/business-impact-analysis", color: "bg-teal-600", tag: "New" },
+    ],
+  },
+  {
+    label: "Support & Contact Centre",
+    services: [
+      { icon: Headphones, name: "Remote IT Support", desc: "Fast, secure remote helpdesk and on-demand technical support for your staff and systems, wherever they are.", href: "/services/remote-it-support", color: "bg-cyan-600", tag: "Popular" },
+      { icon: PhoneCall, name: "Call Center Solution", desc: "Cloud contact centre with voice, WhatsApp, email and chat in one place, built for great customer care.", href: "/services/call-center-solution", color: "bg-orange-600", tag: "New" },
       { icon: Building2, name: "Custom ERP Solutions", desc: "Bespoke ERP systems tailored to your operations, finance, and reporting needs.", href: "/services/custom-erp-solutions", color: "bg-amber-600", tag: "New" },
     ],
   },
@@ -66,6 +82,7 @@ const categories: { label: string; services: Service[] }[] = [
       { icon: Users, name: "Zoho CRM Plus", desc: "Unified customer experience platform with sales, marketing, and support capabilities.", href: "/services/zoho-crm", color: "bg-fuchsia-600" },
       { icon: Code2, name: "Web Development", desc: "Fast, modern, SEO-friendly websites built for growth and conversions.", href: "/services/web-development", color: "bg-amber-600", tag: "New" },
       { icon: AppWindow, name: "Web Application", desc: "Scalable custom web applications built around your business workflows.", href: "/services/web-application", color: "bg-amber-600", tag: "New" },
+      { icon: GitBranch, name: "DevOps", desc: "CI/CD pipelines, infrastructure as code and cloud automation for faster, safer releases.", href: "/services/devops", color: "bg-emerald-600", tag: "New" },
     ],
   },
 ];
@@ -84,7 +101,7 @@ export function ServicesOverview() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-14 md:py-16 relative overflow-hidden">
       <div className="glow-orb glow-cyan w-[500px] h-[500px] -bottom-60 -left-60 opacity-60" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -96,15 +113,8 @@ export function ServicesOverview() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="tag-pill mb-4">
-            What We Do
-          </span>
-          <h2 className="heading-secondary text-3xl sm:text-4xl lg:text-5xl text-white text-balance mb-5">
-            Comprehensive IT Solutions
-            <br className="hidden sm:block" />
-            <span className="gradient-text"> for Every Business Need</span>
-          </h2>
-          <p className="text-[#A6B3C9] text-lg max-w-2xl mx-auto text-balance">
+          <ScrollText className="heading-secondary text-3xl sm:text-4xl lg:text-5xl text-ink text-balance mb-5" text={"Comprehensive IT Solutions"} accent={"for Every Business Need"} />
+          <p className="text-body text-lg max-w-2xl mx-auto text-balance">
             From cloud migration to cybersecurity, we deliver end-to-end technology services
             that drive measurable business outcomes.
           </p>
@@ -124,8 +134,8 @@ export function ServicesOverview() {
               onClick={() => setActive(i)}
               className={`label-mono px-4 py-2.5 rounded-full border transition-all duration-200 ${
                 i === active
-                  ? "bg-[#0078D4]/20 border-[#0078D4]/50 text-[#7CC3F2] shadow-lg shadow-[#0078D4]/20"
-                  : "bg-white/5 border-white/10 text-[#A6B3C9] hover:bg-white/10 hover:text-white"
+                  ? "bg-[#0078D4]/20 border-[#0078D4]/50 text-accent-soft shadow-lg shadow-[#0078D4]/20"
+                  : "bg-white/5 border-white/10 text-body hover:bg-white/10 hover:text-ink"
               }`}
             >
               {cat.label}
@@ -141,19 +151,13 @@ export function ServicesOverview() {
             initial="hidden"
             animate="show"
             exit={{ opacity: 0 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+            className={`grid grid-cols-1 sm:grid-cols-2 gap-5 ${categories[active].services.length % 4 === 0 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}
           >
             {categories[active].services.map((service) => (
               <motion.div key={service.name} variants={item}>
                 <Link href={service.href} className="group block h-full">
                   <div className="glass-card glass-card-hover h-full p-6 relative overflow-hidden">
                     {/* Tag */}
-                    {service.tag && (
-                      <span className="absolute top-4 right-4 label-mono !text-[10px] px-2 py-1 rounded-full bg-[#0078D4]/15 border border-[#0078D4]/30 text-[#7CC3F2]">
-                        {service.tag}
-                      </span>
-                    )}
-
                     {/* Icon */}
                     <div className="mb-4 group-hover:scale-110 transition-transform duration-300 inline-block">
                       <BrandIcon
@@ -164,13 +168,13 @@ export function ServicesOverview() {
                       />
                     </div>
 
-                    <h3 className="font-bold text-white text-base mb-2 group-hover:text-[#40A3E0] transition-colors">
+                    <h3 className="font-bold text-ink text-base mb-2 group-hover:text-accent transition-colors">
                       {service.name}
                     </h3>
-                    <p className="text-[#7C8AA5] text-sm leading-relaxed">{service.desc}</p>
+                    <p className="text-mute text-sm leading-relaxed">{service.desc}</p>
 
                     {/* Learn more arrow */}
-                    <div className="flex items-center gap-1 mt-4 text-[#40A3E0] text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-1 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                       <span>Learn more</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </div>

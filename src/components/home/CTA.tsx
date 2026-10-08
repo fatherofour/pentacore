@@ -4,7 +4,8 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Calendar, Phone, MessageCircle } from "lucide-react";
+import { ArrowRight, Calendar, Phone } from "@/components/ui/icons";
+import { WhatsAppIcon } from "@/components/ui/BrandIcons";
 
 export function CTA() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -15,7 +16,7 @@ export function CTA() {
   const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden">
+    <section ref={sectionRef} className="py-14 md:py-16 relative overflow-hidden">
       {/* Parallax background photo */}
       <motion.div style={{ y: imageY }} className="absolute inset-0 scale-110">
         <Image
@@ -25,7 +26,7 @@ export function CTA() {
           sizes="100vw"
           className="object-cover opacity-20"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#060B1A] via-[#060B1A]/80 to-[#060B1A]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-page via-page/80 to-page" />
       </motion.div>
 
       {/* Glow orbs */}
@@ -40,19 +41,16 @@ export function CTA() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="tag-pill mb-6">
-              Ready to Transform?
-            </span>
 
-            <h2 className="heading-display text-white text-5xl sm:text-6xl lg:text-7xl mb-6 text-balance">
+            <h2 className="heading-display text-ink text-5xl sm:text-6xl lg:text-7xl mb-6 text-balance">
               Let&apos;s Transform Your
               <br />
               <span className="gradient-text">Business Together</span>
             </h2>
 
-            <p className="text-[#A6B3C9] text-lg leading-relaxed mb-10 text-balance">
+            <p className="text-body text-lg leading-relaxed mb-10 text-balance">
               Whether you&apos;re modernising your workplace, migrating to the cloud,
-              or strengthening your security posture—we&apos;re here to guide you every step of the way.
+              or strengthening your security posture, we&apos;re here to guide you every step of the way.
             </p>
 
             {/* Action cards — glass */}
@@ -73,10 +71,10 @@ export function CTA() {
                   primary: false,
                 },
                 {
-                  icon: MessageCircle,
+                  icon: WhatsAppIcon,
                   title: "WhatsApp Chat",
                   desc: "Chat with us directly",
-                  href: "#",
+                  href: "https://wa.me/2348137996917",
                   primary: false,
                 },
               ].map(({ icon: Icon, title, desc, href, primary }) => (
@@ -92,10 +90,10 @@ export function CTA() {
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 border border-white/15 ${
                     primary ? "bg-[#0078D4]/40" : "bg-white/8"
                   }`}>
-                    <Icon className="w-6 h-6 text-white" />
+                    <Icon className="w-6 h-6 text-ink" />
                   </div>
-                  <p className="text-white font-bold text-base mb-1">{title}</p>
-                  <p className="text-[#A6B3C9] text-xs text-center">{desc}</p>
+                  <p className="text-ink font-bold text-base mb-1">{title}</p>
+                  <p className="text-body text-xs text-center">{desc}</p>
                 </Link>
               ))}
             </div>
@@ -111,7 +109,7 @@ export function CTA() {
               </Link>
             </div>
 
-            <p className="text-[#7C8AA5] text-sm mt-6">
+            <p className="text-mute text-sm mt-6">
               No commitment required · Free initial assessment · Response within 2 hours
             </p>
           </motion.div>
