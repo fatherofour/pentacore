@@ -362,7 +362,7 @@ const services: Record<
 };
 
 export async function generateStaticParams() {
-  return Object.keys(services).map((slug) => ({ slug }));
+  return [...Object.keys(services), ...Object.keys(extraServices)].map((slug) => ({ slug }));
 }
 
 type BaseService = (typeof services)[string];

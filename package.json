@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "build:render": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
+    "start:render": "node .next/standalone/server.js",
     "lint": "eslint"
   },
   "dependencies": {
