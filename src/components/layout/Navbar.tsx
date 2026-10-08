@@ -29,6 +29,7 @@ import {
   SearchCheck,
   Activity,
   ClipboardCheck,
+  Lightbulb,
 } from "@/components/ui/icons";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -82,7 +83,7 @@ const services = [
       { name: "Zoho CRM Plus", icon: Users, href: "/services/zoho-crm", desc: "Customer relationship management" },
       { name: "Remote IT Support", icon: Headphones, href: "/services/remote-it-support", desc: "Helpdesk & on-demand remote support" },
       { name: "Call Center Solution", icon: PhoneCall, href: "/services/call-center-solution", desc: "Cloud contact centre for customer care" },
-      { name: "IT Consulting", icon: BarChart3, href: "/services/consulting", desc: "Strategic technology advisory" },
+      { name: "IT Consulting", icon: Lightbulb, href: "/services/consulting", desc: "Strategic technology advisory" },
     ],
   },
 ];

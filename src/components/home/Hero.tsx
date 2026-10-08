@@ -13,7 +13,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { ArrowRight, Cloud, Play, Shield, Zap } from "@/components/ui/icons";
+import { ArrowRight, Play, Zap } from "@/components/ui/icons";
 
 const rotatingWords = ["Intelligent", "Secure", "Scalable", "Cloud-First"];
 
@@ -180,8 +180,8 @@ export function Hero() {
           >
             <div className="glass-card animate-bob p-4 text-left [--bob-rot:-3deg]">
               <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-lg bg-[#0078D4]/20 flex items-center justify-center">
-                  <Cloud className="w-4 h-4 text-accent" />
+                <div className="w-9 h-9 rounded-lg bg-white border border-black/[0.06] shadow-[0_4px_14px_-4px_rgba(2,6,23,0.35)] flex items-center justify-center p-1.5">
+                  <Image src="/logos/azure.svg" alt="Microsoft Azure" width={28} height={28} className="w-full h-full object-contain" />
                 </div>
                 <span className="text-sm font-medium text-[#22c55e]">Live</span>
               </div>
@@ -206,8 +206,8 @@ export function Hero() {
           >
             <div className="glass-card animate-bob p-4 text-left [--bob-rot:3deg] [animation-delay:-3s]">
               <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-lg bg-[#7C3AED]/20 flex items-center justify-center">
-                  <Shield className="w-4 h-4 text-[#a78bfa]" />
+                <div className="w-9 h-9 rounded-lg bg-white border border-black/[0.06] shadow-[0_4px_14px_-4px_rgba(2,6,23,0.35)] flex items-center justify-center p-1.5">
+                  <Image src="/logos/azure.svg" alt="Microsoft Azure" width={28} height={28} className="w-full h-full object-contain" />
                 </div>
                 <span className="label-mono text-[#a78bfa]">Secured</span>
               </div>

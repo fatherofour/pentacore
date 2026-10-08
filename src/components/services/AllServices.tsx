@@ -6,6 +6,7 @@ import {
   Monitor, Cloud, BarChart3, Globe, Server, Shield, Database, Lock,
   Cpu, Users, Headphones, Briefcase, GraduationCap, Zap, ArrowRight,
   Building2, Code2, AppWindow, PhoneCall, GitBranch, SearchCheck, Activity, ClipboardCheck,
+  Lightbulb,
 } from "@/components/ui/icons";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 
@@ -65,7 +66,7 @@ const categories = [
       { icon: Headphones, name: "Remote IT Support", slug: "remote-it-support", desc: "Remote helpdesk and on-demand support to keep your people productive." },
       { icon: PhoneCall, name: "Call Center Solution", slug: "call-center-solution", desc: "Cloud contact centre for voice, WhatsApp, email and chat customer care." },
       { icon: GraduationCap, name: "Training", slug: "training", desc: "Microsoft 365, security awareness, and technology adoption training." },
-      { icon: BarChart3, name: "IT Consulting", slug: "consulting", desc: "Strategic technology advisory and digital transformation roadmaps." },
+      { icon: Lightbulb, name: "IT Consulting", slug: "consulting", desc: "Strategic technology advisory and digital transformation roadmaps." },
     ],
     color: "bg-violet-600",
   },

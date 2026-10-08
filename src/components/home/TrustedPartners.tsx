@@ -14,7 +14,7 @@ const partners = [
 
 function PartnerLogo({ name, src }: { name: string; src: string }) {
   return (
-    <div className="flex items-center justify-center px-8 py-5 rounded-2xl bg-white/85 backdrop-blur-md border border-white/20 shadow-lg shadow-black/20 hover:bg-white transition-colors duration-300 flex-shrink-0 h-20 min-w-[168px]">
+    <div className="flex items-center justify-center px-8 py-4 rounded-2xl bg-white/85 backdrop-blur-md border border-white/20 shadow-lg shadow-black/20 hover:bg-white transition-colors duration-300 flex-shrink-0 h-15 min-w-[160px]">
       <Image
         src={src}
         alt={name}

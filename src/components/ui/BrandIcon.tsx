@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { IconType } from "@/components/ui/icons";
+import { Lightbulb, type IconType } from "@/components/ui/icons";
 
 /** Official OEM product icon for each service (Microsoft, Zoho, Cisco). */
 export const BRAND_LOGOS: Record<string, string> = {
@@ -12,7 +12,6 @@ export const BRAND_LOGOS: Record<string, string> = {
   "dynamics-365": "/logos/products/dynamics-365.svg",
   "custom-erp-solutions": "/logos/products/custom-erp-solutions.svg",
   "call-center-solution": "/logos/products/call-center-solution.svg",
-  consulting: "/logos/products/consulting.svg",
   training: "/logos/products/training.svg",
   // Azure & infrastructure
   azure: "/logos/azure.svg",
@@ -53,7 +52,7 @@ const SIZES = {
   lg: { box: "w-20 h-20 rounded-2xl p-3.5", icon: "w-9 h-9" },
 };
 
-export function BrandIcon({ slug, name, fallback: Fallback, fallbackColor = "bg-[#0078D4]", size = "md" }: BrandIconProps) {
+export function BrandIcon({ slug, name, fallback: Fallback = Lightbulb, fallbackColor = "bg-[#0078D4]", size = "md" }: BrandIconProps) {
   const logo = BRAND_LOGOS[slug];
   const s = SIZES[size];
 
@@ -67,7 +66,7 @@ export function BrandIcon({ slug, name, fallback: Fallback, fallbackColor = "bg-
 
   return (
     <div className={`${s.box} flex-shrink-0 ${fallbackColor} border border-white/20 shadow-lg shadow-black/25 flex items-center justify-center`}>
-      {Fallback && <Fallback className={`${s.icon} text-white`} />}
+      <Fallback className={`${s.icon} text-white`} />
     </div>
   );
 }
