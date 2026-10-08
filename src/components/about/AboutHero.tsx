@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { HeroFX } from "@/components/ui/HeroFX";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -13,7 +14,7 @@ export function AboutHero() {
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
 
   return (
-    <section ref={sectionRef} className="relative pt-40 pb-20 overflow-hidden">
+    <section ref={sectionRef} className="relative pt-40 pb-12 overflow-hidden">
       {/* Parallax background photo */}
       <motion.div style={{ y: imageY }} className="absolute inset-0 scale-110">
         <Image
@@ -22,14 +23,12 @@ export function AboutHero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-20"
+          className="hero-photo object-cover opacity-40 saturate-[1.2]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#060B1A]/70 via-[#060B1A]/85 to-[#060B1A]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-page/70 via-page/85 to-page" />
       </motion.div>
 
-      <div className="glow-orb glow-blue w-[480px] h-[480px] -top-32 -left-32" />
-      <div className="glow-orb glow-purple w-[400px] h-[400px] top-10 -right-32" />
-      <div className="absolute inset-0 grid-lines pointer-events-none" />
+      <HeroFX />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
@@ -37,14 +36,11 @@ export function AboutHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="tag-pill mb-6">
-            About Pentacore Systems
-          </span>
-          <h1 className="heading-display text-white text-6xl sm:text-7xl lg:text-8xl mb-6 text-balance">
+          <h1 className="heading-display text-ink text-6xl sm:text-7xl lg:text-7xl mb-6 text-balance">
             The Story Behind{" "}
-            <span className="gradient-text">Pentacore Systems</span>
+            <span className="gradient-text">The Crew Solutions</span>
           </h1>
-          <p className="text-[#A6B3C9] text-xl max-w-2xl mx-auto leading-relaxed text-balance">
+          <p className="text-body text-xl max-w-2xl mx-auto leading-relaxed text-balance">
             A decade of innovation, expertise, and unwavering commitment to helping
             businesses thrive in the digital age.
           </p>

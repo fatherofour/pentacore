@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp, MessageCircle } from "lucide-react";
+import { ArrowUp } from "@/components/ui/icons";
+import { WhatsAppIcon } from "@/components/ui/BrandIcons";
 
 export function FloatingActions() {
   const [showTop, setShowTop] = useState(false);
@@ -28,7 +29,7 @@ export function FloatingActions() {
         className="w-12 h-12 rounded-xl bg-[#25D366]/90 backdrop-blur-md border border-white/20 shadow-lg shadow-[#25D366]/30 flex items-center justify-center hover:bg-[#25D366] hover:scale-110 transition-transform"
         aria-label="WhatsApp Chat"
       >
-        <MessageCircle className="w-6 h-6 text-white" />
+        <WhatsAppIcon className="w-6 h-6 text-white" />
       </motion.a>
 
       {/* Back to top */}
@@ -42,7 +43,7 @@ export function FloatingActions() {
             className="w-12 h-12 rounded-xl glass-strong shadow-lg shadow-black/30 flex items-center justify-center hover:border-[#0078D4]/60 hover:scale-110 transition-transform"
             aria-label="Back to top"
           >
-            <ArrowUp className="w-5 h-5 text-white" />
+            <ArrowUp className="w-5 h-5 text-ink" />
           </motion.button>
         )}
       </AnimatePresence>

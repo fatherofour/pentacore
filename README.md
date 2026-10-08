@@ -1,6 +1,6 @@
-# Pentacore Systems
+# The Crew Solutions
 
-Corporate marketing website for Pentacore Systems, an IT consulting and digital transformation company. Built with Next.js 16 (App Router), React 19, Tailwind CSS v4, and Framer Motion.
+Corporate marketing website for The Crew Solutions, an IT consulting and digital transformation company. Built with Next.js 16 (App Router), React 19, Tailwind CSS v4, and Framer Motion.
 
 ## Getting Started
 
@@ -47,7 +47,7 @@ sudo nginx -t && sudo systemctl reload nginx
 - `src/app` — routes (App Router)
 - `src/components` — page sections and UI components, grouped by area (home, services, about, contact, etc.)
 - `src/lib` — shared utilities
-- `public` — static assets, including the Pentacore logo and favicon
+- `public` — static assets, including The Crew Solutions' logo and favicon
 
 ## Deployment
 

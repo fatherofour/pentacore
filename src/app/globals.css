@@ -25,9 +25,14 @@
   --color-accent-chip: rgba(0, 120, 212, 0.16);
   --color-accent-highlight: #F5A623;
 
-  --font-sans: var(--font-space-grotesk), 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-bebas-neue), 'Bebas Neue', ui-sans-serif, system-ui, sans-serif;
-  --font-mono-label: var(--font-ibm-plex-mono), 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
+  --font-mono-label: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+
+  /* No text smaller than 14px anywhere */
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.45;
 
   /* Type scale */
   --text-caption: 0.75rem;
@@ -74,6 +79,9 @@
     background-attachment: fixed;
     color: #DCE3F0;
     line-height: 1.6;
+    letter-spacing: -0.006em;
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
   }
 
   ::selection {
@@ -98,28 +106,29 @@
 @layer utilities {
   /* Editorial display heading — massive uppercase condensed, tight leading */
   .heading-display {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    text-transform: none;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
   }
 
   /* Secondary uppercase heading — Space Grotesk, lighter weight, still uppercase */
   .heading-secondary {
     font-family: var(--font-sans);
-    font-weight: 600;
-    text-transform: uppercase;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
+    font-weight: 500;
+    text-transform: none;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
   }
 
   /* Mono micro-label — tags, meta, numbered markers */
   .label-mono {
-    font-family: var(--font-mono-label);
-    font-size: 0.75rem;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
   /* ---------- Glassmorphism core surfaces ---------- */
@@ -142,7 +151,10 @@
 
   /* Signature glass card — the workhorse surface */
   .glass-card {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+    --glow: 0;
+    background:
+      radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(64, 163, 224, var(--glow)), transparent 65%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.10);
@@ -153,8 +165,12 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
   }
 
+  .glass-card:hover {
+    --glow: 0.16;
+  }
+
   .glass-card-hover:hover {
-    transform: translateY(-4px);
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px);
     border-color: rgba(0, 120, 212, 0.45);
     box-shadow:
       0 16px 48px rgba(2, 6, 23, 0.5),
@@ -201,10 +217,9 @@
     color: #7CC3F2;
     border-radius: var(--radius-pill);
     padding: 0.375rem 0.9rem;
-    font-family: var(--font-mono-label);
-    font-size: 0.75rem;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
   }
 
   .glass-chip {
@@ -218,7 +233,7 @@
     color: #DCE3F0;
     border-radius: var(--radius-pill);
     padding: 0.375rem 0.9rem;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
   }
 
   /* Buttons */
@@ -227,19 +242,19 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background: linear-gradient(135deg, #0078D4, #0062AB);
+    background: linear-gradient(180deg, #1A86DB, #0067B8);
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: var(--radius-button);
-    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 0.9rem 1.6rem;
     font-weight: 500;
-    box-shadow: 0 4px 24px rgba(0, 120, 212, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: box-shadow 0.3s ease, transform 0.2s ease, filter 0.2s ease;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 10px 30px -12px rgba(0, 120, 212, 0.7);
+    transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
   }
   .btn-filled:hover {
-    filter: brightness(1.12);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 32px rgba(0, 120, 212, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transform: translate(var(--tx, 0px), calc(var(--ty, 0px) - 1px));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 16px 40px -14px rgba(0, 120, 212, 0.85);
   }
 
   .btn-ghost {
@@ -252,16 +267,17 @@
     backdrop-filter: blur(16px);
     color: #DCE3F0;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: var(--radius-button);
-    padding: 1rem 1.5rem;
+    border-radius: 999px;
+    padding: 0.9rem 1.6rem;
     font-weight: 500;
+    letter-spacing: -0.01em;
     transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
   }
   .btn-ghost:hover {
     background: rgba(255, 255, 255, 0.10);
     border-color: rgba(255, 255, 255, 0.35);
     color: #ffffff;
-    transform: translateY(-1px);
+    transform: translate(var(--tx, 0px), calc(var(--ty, 0px) - 1px));
   }
 
   /* Floating glass nav pill */
@@ -300,7 +316,14 @@
   /* Gradient text accents */
   .gradient-text,
   .gradient-text-blue {
-    background: linear-gradient(100deg, #40A3E0, #06B6D4 55%, #7C9CF2);
+    background: linear-gradient(100deg, #40A3E0, #06B6D4 30%, #7C9CF2 55%, #a78bfa 75%, #40A3E0);
+    background-size: 220% 100%;
+    animation: gradient-shift 8s ease-in-out infinite alternate;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    padding-inline: 0.04em 0.1em;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -392,7 +415,138 @@
     background-size: 72px 72px;
   }
 
+  /* ---------- Hero motion ---------- */
+
+  /* Drifting aurora blobs */
+  .aurora {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    pointer-events: none;
+    mix-blend-mode: screen;
+    will-change: transform;
+  }
+  .aurora-1 { animation: aurora-a 18s ease-in-out infinite; }
+  .aurora-2 { animation: aurora-b 22s ease-in-out infinite; }
+  .aurora-3 { animation: aurora-c 26s ease-in-out infinite; }
+
+  @keyframes aurora-a {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(18vw, 8vh) scale(1.2); }
+    66% { transform: translate(6vw, 22vh) scale(0.9); }
+  }
+  @keyframes aurora-b {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    40% { transform: translate(-20vw, 14vh) scale(1.15); }
+    70% { transform: translate(-8vw, -6vh) scale(0.95); }
+  }
+  @keyframes aurora-c {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(14vw, -14vh) scale(1.25); }
+  }
+
+  /* Bobbing floating cards (offset per card via animation-delay) */
+  .animate-bob {
+    animation: bob 7s ease-in-out infinite;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0) rotate(var(--bob-rot, 0deg)); }
+    50% { transform: translateY(-14px) rotate(var(--bob-rot, 0deg)); }
+  }
+
+  /* Light sweep across the primary CTA */
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.35) 50%, transparent 65%);
+    transform: translateX(-120%);
+    animation: shimmer 3.6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes shimmer {
+    0%, 55% { transform: translateX(-120%); }
+    100% { transform: translateX(120%); }
+  }
+
+  /* Scrolling scan line over the grid */
+  .scan-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 220px;
+    background: linear-gradient(180deg, transparent, rgba(64, 163, 224, 0.07), transparent);
+    animation: scan 9s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes scan {
+    0% { transform: translateY(-240px); }
+    100% { transform: translateY(110vh); }
+  }
+
+  /* Live status dot */
+  .live-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: #22c55e;
+  }
+  .live-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: #22c55e;
+    animation: live-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  @keyframes live-ping {
+    75%, 100% { transform: scale(2.6); opacity: 0; }
+  }
+
+  @keyframes gradient-shift {
+    from { background-position: 0% 50%; }
+    to { background-position: 100% 50%; }
+  }
+
+  /* Route transition — pure CSS so content never depends on JS to appear */
+  .page-enter {
+    animation: page-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes page-in {
+    from { opacity: 0; transform: translateY(14px); filter: blur(6px); }
+    to { opacity: 1; transform: none; filter: none; }
+  }
+
+  /* Outlined display type for marquee bands */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(166, 179, 201, 0.45);
+  }
+
+  /* Animated hairline that draws under section headings when revealed */
+  .rule-glow {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(64, 163, 224, 0.7), rgba(124, 58, 237, 0.6), transparent);
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    .page-enter,
+    .gradient-text,
+    .gradient-text-blue {
+      animation: none;
+    }
+    .aurora,
+    .animate-bob,
+    .btn-shimmer::after,
+    .scan-line,
+    .live-dot::after {
+      animation: none;
+    }
     .marquee-track,
     .animate-float,
     .animate-pulse-slow {
@@ -403,3 +557,115 @@
     }
   }
 }
+
+
+/* =====================================================================
+   THEME TOKENS  (dark is the default; add class "light" to <html>)
+   ===================================================================== */
+:root {
+  --c-page: #060B1A;
+  --c-surface: #0B1226;
+  --c-ink: #ffffff;
+  --c-body: #A6B3C9;
+  --c-mute: #7C8AA5;
+  --c-accent: #40A3E0;
+  --c-accent-soft: #7CC3F2;
+}
+html.light {
+  --c-page: #F4F7FB;
+  --c-surface: #FFFFFF;
+  --c-ink: #0F172A;
+  --c-body: #475569;
+  --c-mute: #64748B;
+  --c-accent: #0B69C7;
+  --c-accent-soft: #0078D4;
+  color-scheme: light;
+}
+@theme inline {
+  --color-page: var(--c-page);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-ink);
+  --color-body: var(--c-body);
+  --color-mute: var(--c-mute);
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+}
+
+/* =====================================================================
+   LIGHT MODE OVERRIDES
+   (unlayered, so they win over the component/utility layers above)
+   ===================================================================== */
+html.light body {
+  background-color: var(--c-page);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(0, 120, 212, 0.10), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(124, 58, 237, 0.07), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(6, 182, 212, 0.07), transparent 60%);
+  color: #1E293B;
+}
+html.light ::-webkit-scrollbar-track { background: #E2E8F0; }
+
+/* glass surfaces */
+html.light .glass { background: rgba(255, 255, 255, 0.72); border-color: rgba(15, 23, 42, 0.10); }
+html.light .glass-strong { background: rgba(255, 255, 255, 0.9); border-color: rgba(15, 23, 42, 0.10); }
+html.light .glass-card,
+html.light .card-flat {
+  --glow: 0;
+  background:
+    radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(0, 120, 212, var(--glow)), transparent 65%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.74));
+  border-color: rgba(15, 23, 42, 0.09);
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+html.light .glass-card:hover { --glow: 0.10; }
+html.light .glass-card-hover:hover {
+  border-color: rgba(0, 120, 212, 0.45);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(0, 120, 212, 0.12);
+}
+html.light .glass-chip { background: rgba(15, 23, 42, 0.05); border-color: rgba(15, 23, 42, 0.10); color: #1E293B; }
+html.light .tag-pill { background: rgba(0, 120, 212, 0.10); border-color: rgba(0, 120, 212, 0.28); color: #0B69C7; }
+html.light .nav-pill { background: rgba(255, 255, 255, 0.78); border-color: rgba(15, 23, 42, 0.10); box-shadow: 0 8px 28px rgba(15, 23, 42, 0.10); }
+html.light .btn-ghost { background: rgba(255, 255, 255, 0.72); color: #1E293B; border-color: rgba(15, 23, 42, 0.16); }
+html.light .btn-ghost:hover { background: #ffffff; color: #0F172A; border-color: rgba(15, 23, 42, 0.32); }
+html.light .glass-input { background: #ffffff; border-color: rgba(15, 23, 42, 0.16); color: #0F172A; }
+html.light .glass-input::placeholder { color: #94A3B8; }
+html.light .glass-input:focus { background: #ffffff; border-color: rgba(0, 120, 212, 0.6); box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.14); }
+
+/* type + texture */
+html.light .gradient-text,
+html.light .gradient-text-blue {
+  background-image: linear-gradient(100deg, #0078D4, #0891B2 30%, #4F46E5 55%, #7C3AED 75%, #0078D4);
+}
+html.light .text-outline { -webkit-text-stroke: 1.5px rgba(15, 23, 42, 0.35); }
+html.light .grid-lines {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+}
+html.light .grid-dots { background-image: radial-gradient(circle, rgba(15, 23, 42, 0.10) 1px, transparent 1px); }
+html.light .aurora { mix-blend-mode: normal; opacity: 0.4; }
+html.light .hero-photo { opacity: 0.14; filter: saturate(0.6); }
+html.light .scan-line { background: linear-gradient(180deg, transparent, rgba(0, 120, 212, 0.06), transparent); }
+
+/* Tailwind white-alpha helpers used across components */
+html.light .bg-white\/5 { background-color: rgba(15, 23, 42, 0.04); }
+html.light .bg-white\/8 { background-color: rgba(15, 23, 42, 0.05); }
+html.light .bg-white\/10 { background-color: rgba(15, 23, 42, 0.06); }
+html.light .bg-white\/\[0\.02\] { background-color: rgba(15, 23, 42, 0.02); }
+html.light .hover\:bg-white\/10:hover { background-color: rgba(15, 23, 42, 0.08); }
+html.light .hover\:bg-white\/8:hover { background-color: rgba(15, 23, 42, 0.06); }
+html.light .border-white\/10 { border-color: rgba(15, 23, 42, 0.10); }
+html.light .border-white\/15 { border-color: rgba(15, 23, 42, 0.13); }
+html.light .border-white\/20 { border-color: rgba(15, 23, 42, 0.16); }
+html.light .border-white\/25 { border-color: rgba(15, 23, 42, 0.20); }
+html.light .border-white\/30 { border-color: rgba(15, 23, 42, 0.24); }
+html.light .hover\:border-white\/25:hover { border-color: rgba(15, 23, 42, 0.25); }
+html.light .ring-white\/20 { --tw-ring-color: rgba(15, 23, 42, 0.16); }
+
+/* =====================================================================
+   WIDE SCREENS: everything is rem-based, so raising the root size scales
+   type, spacing and the 80rem content width together on big monitors.
+   ===================================================================== */
+@media (min-width: 1800px) { html { font-size: 17px; } }
+@media (min-width: 2200px) { html { font-size: 19px; } }
+@media (min-width: 2800px) { html { font-size: 22px; } }

@@ -5,8 +5,9 @@ import { motion } from "framer-motion";
 import {
   Monitor, Cloud, BarChart3, Globe, Server, Shield, Database, Lock,
   Cpu, Users, Headphones, Briefcase, GraduationCap, Zap, ArrowRight,
-  Building2, Code2, AppWindow,
-} from "lucide-react";
+  Building2, Code2, AppWindow, PhoneCall, GitBranch, SearchCheck, Activity, ClipboardCheck,
+  Lightbulb,
+} from "@/components/ui/icons";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 
 const categories = [
@@ -19,13 +20,14 @@ const categories = [
       { icon: Globe, name: "Exchange Online", slug: "exchange-online", desc: "Enterprise email platform migration and administration." },
       { icon: Users, name: "Microsoft Teams", slug: "microsoft-teams", desc: "Unified communications, collaboration, and meeting room solutions." },
       { icon: Server, name: "SharePoint Online", slug: "sharepoint", desc: "Intranet, document management, and collaboration portals." },
+      { icon: Monitor, name: "Microsoft Intune", slug: "intune", desc: "Cloud device and app management with Autopilot, compliance and app protection." },
     ],
     color: "bg-blue-600",
   },
   {
     name: "Cloud & Infrastructure",
     services: [
-      { icon: Server, name: "Cloud Migration", slug: "cloud-migration", desc: "Risk-managed migration from on-prem to Azure, AWS, or hybrid environments." },
+      { icon: Server, name: "Cloud Migration", slug: "cloud-migration", desc: "Risk-managed migration from on-prem to Azure, Oracle Cloud, or hybrid environments." },
       { icon: Cpu, name: "Networking (LAN/WAN)", slug: "networking", desc: "Enterprise network design and deployment with Cisco and leading vendors." },
       { icon: Database, name: "Backup & Recovery", slug: "backup-recovery", desc: "Automated backup strategies and tested disaster recovery plans." },
       { icon: Cloud, name: "Cloud Architecture", slug: "cloud-architecture", desc: "Well-architected cloud design reviews and optimisation." },
@@ -39,6 +41,7 @@ const categories = [
       { icon: Building2, name: "Custom ERP Solutions", slug: "custom-erp-solutions", desc: "Bespoke ERP systems tailored to your operations, finance, and reporting needs." },
       { icon: Code2, name: "Web Development", slug: "web-development", desc: "Fast, modern, SEO-friendly websites built for growth and conversions." },
       { icon: AppWindow, name: "Web Application", slug: "web-application", desc: "Scalable custom web applications built around your business workflows." },
+      { icon: GitBranch, name: "DevOps", slug: "devops", desc: "CI/CD pipelines, infrastructure as code and cloud automation." },
     ],
     color: "bg-amber-600",
   },
@@ -49,6 +52,9 @@ const categories = [
       { icon: Lock, name: "Identity Management", slug: "identity-management", desc: "Azure AD, SSO, MFA, and privileged access management." },
       { icon: Monitor, name: "Endpoint Management", slug: "endpoint-management", desc: "Intune MDM/MAM, device compliance, and remote management." },
       { icon: Shield, name: "Cloud Security", slug: "cloud-security", desc: "Microsoft Defender, Sentinel SIEM, and cloud-native security controls." },
+      { icon: SearchCheck, name: "Cybersecurity Gap Analysis", slug: "cybersecurity-gap-analysis", desc: "Benchmark your security against a recognised framework and close the gaps." },
+      { icon: Activity, name: "Business Impact Analysis", slug: "business-impact-analysis", desc: "Understand critical processes and downtime costs to guide recovery planning." },
+      { icon: ClipboardCheck, name: "IT Audit", slug: "it-audit", desc: "Independent review of IT controls, systems and processes." },
     ],
     color: "bg-rose-600",
   },
@@ -57,10 +63,10 @@ const categories = [
     services: [
       { icon: Briefcase, name: "Zoho Workplace", slug: "zoho-workplace", desc: "All-in-one productivity suite with email, docs, and collaboration." },
       { icon: Users, name: "Zoho CRM Plus", slug: "zoho-crm", desc: "Unified customer experience platform across sales and support." },
-      { icon: Headphones, name: "Managed Services", slug: "managed-services", desc: "24/7 proactive IT monitoring, support, and managed helpdesk." },
-      { icon: Users, name: "IT Outsourcing", slug: "it-outsourcing", desc: "Dedicated IT teams acting as your external IT department." },
+      { icon: Headphones, name: "Remote IT Support", slug: "remote-it-support", desc: "Remote helpdesk and on-demand support to keep your people productive." },
+      { icon: PhoneCall, name: "Call Center Solution", slug: "call-center-solution", desc: "Cloud contact centre for voice, WhatsApp, email and chat customer care." },
       { icon: GraduationCap, name: "Training", slug: "training", desc: "Microsoft 365, security awareness, and technology adoption training." },
-      { icon: BarChart3, name: "IT Consulting", slug: "consulting", desc: "Strategic technology advisory and digital transformation roadmaps." },
+      { icon: Lightbulb, name: "IT Consulting", slug: "consulting", desc: "Strategic technology advisory and digital transformation roadmaps." },
     ],
     color: "bg-violet-600",
   },
@@ -68,7 +74,7 @@ const categories = [
 
 export function AllServices() {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-14 md:py-16 relative overflow-hidden">
       <div className="glow-orb glow-blue w-[460px] h-[460px] top-40 -left-56 opacity-50" />
       <div className="glow-orb glow-purple w-[460px] h-[460px] bottom-40 -right-56 opacity-50" />
 
@@ -87,7 +93,7 @@ export function AllServices() {
                   <span className="text-white font-bold text-sm">{catIdx + 1}</span>
                 </div>
                 <div>
-                  <h2 className="heading-secondary text-xl text-white">{cat.name}</h2>
+                  <h2 className="heading-secondary text-xl text-ink">{cat.name}</h2>
                   <div className={`h-0.5 w-16 rounded-full ${cat.color} mt-1`} />
                 </div>
               </motion.div>
@@ -112,11 +118,11 @@ export function AllServices() {
                             size="sm"
                           />
                         </div>
-                        <h3 className="font-bold text-white text-base mb-2 group-hover:text-[#40A3E0] transition-colors">
+                        <h3 className="font-bold text-ink text-base mb-2 group-hover:text-accent transition-colors">
                           {service.name}
                         </h3>
-                        <p className="text-[#7C8AA5] text-sm leading-relaxed mb-4">{service.desc}</p>
-                        <div className="flex items-center gap-1 text-[#40A3E0] text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-mute text-sm leading-relaxed mb-4">{service.desc}</p>
+                        <div className="flex items-center gap-1 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                           <span>Learn more</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </div>

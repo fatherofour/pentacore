@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import { Send, CheckCircle, Loader2 } from "lucide-react";
+import { Send, CheckCircle, Loader2 } from "@/components/ui/icons";
 
 const schema = z.object({
   firstName: z.string().min(2, "First name is required"),
@@ -22,13 +22,19 @@ type FormData = z.infer<typeof schema>;
 const services = [
   "Microsoft 365",
   "Azure Cloud",
+  "Microsoft Intune",
+  "SharePoint",
   "Dynamics 365",
   "Cybersecurity",
   "Cloud Migration",
-  "Managed Services",
   "Zoho Solutions",
   "Networking",
-  "IT Outsourcing",
+  "Remote IT Support",
+  "Call Center Solution",
+  "IT Audit",
+  "DevOps",
+  "Cybersecurity Gap Analysis",
+  "Business Impact Analysis",
   "General Enquiry",
 ];
 
@@ -43,7 +49,7 @@ export function ContactForm() {
     reset,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  const onSubmit = async (_data: FormData) => {
+  const onSubmit = async () => {
     setLoading(true);
     await new Promise((r) => setTimeout(r, 1500));
     setLoading(false);
@@ -61,8 +67,8 @@ export function ContactForm() {
         <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 shadow-lg shadow-emerald-600/30 flex items-center justify-center mb-6">
           <CheckCircle className="w-10 h-10 text-white" />
         </div>
-        <h3 className="text-2xl font-bold text-white mb-3">Message Sent!</h3>
-        <p className="text-[#A6B3C9] text-lg max-w-sm">
+        <h3 className="text-2xl font-bold text-ink mb-3">Message Sent!</h3>
+        <p className="text-body text-lg max-w-sm">
           Thank you for reaching out. One of our consultants will be in touch within 2 business hours.
         </p>
         <button
@@ -84,14 +90,14 @@ export function ContactForm() {
       className="glass-card p-8"
     >
       <div className="mb-8">
-        <h2 className="heading-secondary text-2xl text-white mb-2">Book a Consultation</h2>
-        <p className="text-[#A6B3C9]">Fill in the form and we&apos;ll get back to you within 2 hours during business days.</p>
+        <h2 className="heading-secondary text-2xl text-ink mb-2">Book a Consultation</h2>
+        <p className="text-body">Fill in the form and we&apos;ll get back to you within 2 hours during business days.</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-[#A6B3C9] mb-1.5">First Name *</label>
+            <label className="block text-sm font-medium text-body mb-1.5">First Name *</label>
             <input
               {...register("firstName")}
               placeholder="John"
@@ -100,7 +106,7 @@ export function ContactForm() {
             {errors.firstName && <p className="text-rose-400 text-xs mt-1">{errors.firstName.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#A6B3C9] mb-1.5">Last Name *</label>
+            <label className="block text-sm font-medium text-body mb-1.5">Last Name *</label>
             <input
               {...register("lastName")}
               placeholder="Smith"
@@ -111,7 +117,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-[#A6B3C9] mb-1.5">Work Email *</label>
+          <label className="block text-sm font-medium text-body mb-1.5">Work Email *</label>
           <input
             {...register("email")}
             type="email"
@@ -123,7 +129,7 @@ export function ContactForm() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-[#A6B3C9] mb-1.5">Company *</label>
+            <label className="block text-sm font-medium text-body mb-1.5">Company *</label>
             <input
               {...register("company")}
               placeholder="Acme Ltd"
@@ -132,7 +138,7 @@ export function ContactForm() {
             {errors.company && <p className="text-rose-400 text-xs mt-1">{errors.company.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#A6B3C9] mb-1.5">Phone</label>
+            <label className="block text-sm font-medium text-body mb-1.5">Phone</label>
             <input
               {...register("phone")}
               type="tel"
@@ -143,10 +149,10 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-[#A6B3C9] mb-1.5">Service of Interest *</label>
+          <label className="block text-sm font-medium text-body mb-1.5">Service of Interest *</label>
           <select
             {...register("service")}
-            className="glass-input appearance-none [&>option]:bg-[#0B1226] [&>option]:text-white"
+            className="glass-input appearance-none [&>option]:bg-surface [&>option]:text-ink"
           >
             <option value="">Select a service...</option>
             {services.map((s) => (
@@ -157,7 +163,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-[#A6B3C9] mb-1.5">How can we help? *</label>
+          <label className="block text-sm font-medium text-body mb-1.5">How can we help? *</label>
           <textarea
             {...register("message")}
             rows={4}
@@ -185,7 +191,7 @@ export function ContactForm() {
           )}
         </button>
 
-        <p className="text-center text-xs text-[#7C8AA5]">
+        <p className="text-center text-xs text-mute">
           By submitting, you agree to our Privacy Policy. We never share your data.
         </p>
       </form>

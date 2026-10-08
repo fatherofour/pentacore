@@ -1,38 +1,32 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Bebas_Neue, IBM_Plex_Mono } from "next/font/google";
+import { Instrument_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingActions } from "@/components/ui/FloatingActions";
+import { InteractiveEffects } from "@/components/ui/InteractiveEffects";
 
-const spaceGrotesk = Space_Grotesk({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
+  variable: "--font-instrument-sans",
   display: "swap",
 });
 
-const bebasNeue = Bebas_Neue({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
-  variable: "--font-bebas-neue",
-  display: "swap",
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-ibm-plex-mono",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Pentacore Systems | IT Consulting & Digital Transformation",
-    template: "%s | Pentacore Systems",
+    default: "The Crew Solutions | IT Consulting & Digital Transformation",
+    template: "%s | The Crew Solutions",
   },
   description:
-    "Pentacore Systems is a premium IT Consulting and Digital Transformation company helping organisations modernise their workplace, migrate to the cloud, secure digital assets, and accelerate business growth.",
+    "The Crew Solutions is a premium IT Consulting and Digital Transformation company helping organisations modernise their workplace, migrate to the cloud, secure digital assets, and accelerate business growth.",
   keywords: [
     "IT Consulting",
     "Digital Transformation",
@@ -42,16 +36,16 @@ export const metadata: Metadata = {
     "Cybersecurity",
     "Dynamics 365",
     "Zoho CRM",
-    "Managed Services",
-    "IT Outsourcing",
+    "Remote IT Support",
+    "Call Center Solution",
   ],
   openGraph: {
     type: "website",
     locale: "en_GB",
-    siteName: "Pentacore Systems",
-    title: "Pentacore Systems | IT Consulting & Digital Transformation",
+    siteName: "The Crew Solutions",
+    title: "The Crew Solutions | IT Consulting & Digital Transformation",
     description:
-      "Empowering businesses through intelligent IT solutions. Cloud migration, cybersecurity, Microsoft 365, and managed services.",
+      "Empowering businesses through intelligent IT solutions. Cloud migration, cybersecurity, Microsoft 365, remote IT support, and call center solutions.",
   },
 };
 
@@ -61,12 +55,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${bebasNeue.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${instrumentSans.variable} ${instrumentSerif.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light')}catch(e){}",
+          }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col antialiased">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
         <FloatingActions />
+        <InteractiveEffects />
       </body>
     </html>
   );
